@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inicio de Sesión Exitoso</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url("{% static 'imagenes/iniciosesion.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .success-box {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .success-box h1 {
+      font-size: 28px;
+      color: #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    .success-box a {
+      background-color: #bfa46b;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .success-box a:hover {
+      background-color: #a68e4e;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="success-box">
+    <h1>Inicio de sesión exitoso</h1>
+    <a href="{% url 'gestionar_proyectos' %}">Ir a Proyectos</a>
+  </div>
+</body>
+</html>

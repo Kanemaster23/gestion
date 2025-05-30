@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gestión de Proyectos</title>
+    {% load static %}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'imagenes/proyectos.webp' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1f1f1f;
+            padding: 15px 40px;
+        }
+
+        .navbar h1 {
+            color: #d4af37;
+            margin: 0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .auth-buttons a {
+            background-color: #d4af37;
+            padding: 8px 14px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #fafafa;
+            margin-top: 10px;
+            padding: 15px;
+            border-left: 4px solid #007BFF;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>PROJECTS JJ</h1>
+    <div class="nav-links">
+        <a href="#">Inicio</a>
+        <a href="#">Sobre Nosotros</a>
+        <a href="#">Proyectos</a>
+    </div>
+    <div class="auth-buttons">
+        <a href="{% url 'login_usuario' %}">Iniciar Sesión</a>
+        <a href="{% url 'registro' %}">Registrarse</a>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Crear Proyecto</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="nombre" placeholder="Nombre del proyecto" required>
+        <label>Fecha esperada de terminación:</label>
+        <input type="date" name="fecha_final" required>
+        <input type="number" name="duracion_dias" placeholder="Número de integrantes" min="1" required>
+        <textarea name="descripcion" placeholder="Descripción (opcional)"></textarea>
+        <button type="submit">Crear Proyecto</button>
+    </form>
+
+    <hr style="margin: 40px 0;">
+
+    <h2>Proyectos registrados</h2>
+    <ul>
+        {% for p in proyectos %}
+            <li>
+                <strong>{{ p.nombre }}</strong> - {{ p.fecha_final }} ({{ p.duracion_dias }} días)<br>
+                {{ p.descripcion }}
+            </li>
+        {% empty %}
+            <li>No hay proyectos registrados aún.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

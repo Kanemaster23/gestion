@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Verificación en dos pasos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'imagenes/iniciosesion.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            text-align: center;
+            width: 360px;
+            animation: fadeIn 0.7s ease-in-out;
+        }
+
+        .box h2 {
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .box p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .box input {
+            padding: 12px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .box button {
+            background-color: #bfa46b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .box button:hover {
+            background-color: #a68e4e;
+        }
+
+        .timer {
+            margin: 15px 0;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Verificación en dos pasos</h2>
+    <p>Se envió un código de 6 dígitos al correo: <br><strong>{{ correo }}</strong></p>
+
+    <form method="POST" action="{% url 'confirmar_2fa' %}">
+        {% csrf_token %}
+        <input type="text" name="codigo" placeholder="Codigo de verificacion" maxlength="6" required />
+        <br />
+        <button type="submit">Confirmar</button>
+    </form>
+
+    <div class="timer" id="contador"></div>
+
+    <form method="GET" action="{% url 'verificacion_2fa' %}">
+        <button id="reenviar" type="submit" disabled>Reenviar codigo</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+
+<script>
+    const expiracion = new Date("{{ expiracion|safe }}").getTime();
+    const contador = document.getElementById('contador');
+    const botonReenviar = document.getElementById('reenviar');
+
+    const x = setInterval(function() {
+        const ahora = new Date().getTime();
+        const distancia = expiracion - ahora;
+
+        const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+        contador.innerHTML = "Tiempo restante: " + minutos + "m " + segundos + "s";
+
+        if (distancia <= 0) {
+            clearInterval(x);
+            contador.innerHTML = "El codigo ha expirado.";
+            botonReenviar.disabled = false;
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>

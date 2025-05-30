@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("{% static 'imagenes/iniciosesion.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #222;
+            padding: 10px 30px;
+        }
+
+        .navbar-left h1 {
+            color: #d9b470;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .navbar-center a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar-center a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-right a {
+            background-color: #c4a15a;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 60px);
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            width: 350px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .login-box input[type="text"],
+        .login-box input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .login-box button {
+            background-color: #b99756;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de navegación -->
+    <div class="navbar">
+        <div class="navbar-left">
+            <h1>PROJECTS JJ</h1>
+        </div>
+        <div class="navbar-center">
+            <a href="#">Inicio</a>
+            <a href="#">Sobre Nosotros</a>
+            <a href="#">Proyectos</a>
+        </div>
+        <div class="navbar-right">
+            <a href="{% url 'registro' %}">Registrarse</a>
+        </div>
+    </div>
+
+    <!-- Contenido del login -->
+    <div class="container">
+        <form method="POST" class="login-box">
+            {% csrf_token %}
+            <h2>Iniciar Sesión</h2>
+            <input type="text" name="nombre_usuario" placeholder="Nombre de usuario" required>
+            <input type="password" name="contraseña" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>
