@@ -22,3 +22,7 @@ def gestionar_proyectos(request):
 
     proyectos = Proyecto.objects.filter(usuario=usuario).order_by('-creado_en')
     return render(request, 'proyectos/gestionar.html', {'proyectos': proyectos})
+
+
+def inicio(request):
+    return render(request, 'proyectos/inicio.html')

@@ -68,6 +68,7 @@
       font-weight: bold;
       cursor: pointer;
       border-radius: 4px;
+      text-decoration: none;
     }
 
     .mensaje-container {
@@ -96,6 +97,22 @@
     .mensaje p {
       font-size: 18px;
       color: #333;
+      margin-bottom: 20px;
+    }
+
+    .btn-login {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #bfa46b;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-login:hover {
+      background-color: #a68f52;
     }
 
     @keyframes fadeIn {
@@ -113,9 +130,9 @@
   <div class="top-bar">
     <nav>
       <ul>
-        <li><a href="#">Inicio</a></li>
+        <li><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
         <li><a href="#">Sobre Nosotros</a></li>
-        <li><a href="#">Proyectos</a></li>
+        <li><a class="nav-link" href="{% url 'gestionar_proyectos' %}">Proyectos</a></li>
       </ul>
     </nav>
     <div class="top-buttons">
@@ -127,6 +144,7 @@
     <div class="mensaje">
       <h1>¡Registro exitoso!</h1>
       <p>Tu cuenta ha sido creada correctamente.<br>Ya puedes iniciar sesión y comenzar a usar la plataforma.</p>
+      <a href="{% url 'login_usuario' %}" class="btn-login">Iniciar Sesión</a>
     </div>
   </div>
 

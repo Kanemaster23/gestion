@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import gestionar_proyectos
+from .views import gestionar_proyectos, inicio
 
 urlpatterns = [
-    path('', gestionar_proyectos, name='gestionar_proyectos'),
+    path('', inicio, name='inicio'),
+    path('gestionar/', gestionar_proyectos, name='gestionar_proyectos'),   
 ]

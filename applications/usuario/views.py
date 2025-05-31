@@ -78,3 +78,4 @@ def verificar_codigo_2fa(request):
             return redirect('login_exitoso')
         else:
             return render(request, 'usuario/2fa.html', {'error': 'Código incorrecto.'})
+        
