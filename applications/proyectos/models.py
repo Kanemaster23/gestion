@@ -2,7 +2,7 @@ from django.db import models
 from applications.usuario.models import Usuario
 
 class Proyecto(models.Model):
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    #usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     nombre = models.CharField(max_length=255)
     descripcion = models.TextField()
     fecha_final = models.DateField()
