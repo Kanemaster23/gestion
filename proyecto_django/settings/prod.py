@@ -14,5 +14,13 @@ DATABASES = {
 CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 SECURE_SSL_REDIRECT = True
 
-# Archivos estáticos para producción
+
+# === Configuración de archivos estáticos ===
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Archivos multimedia (si usas MEDIA en algún lado)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
