@@ -3,6 +3,12 @@ from applications.proyectos.models import Proyecto
 from applications.usuario.models import Usuario
 
 def gestionar_proyectos(request):
+    # Verificar si hay un usuario en sesión
+    if 'usuario_id' not in request.session:
+        return redirect('login_usuario')
+
+    usuario = Usuario.objects.get(id=request.session['usuario_id'])
+
     if request.method == 'POST':
         nombre = request.POST['nombre']
         fecha_final = request.POST['fecha_final']
@@ -10,6 +16,7 @@ def gestionar_proyectos(request):
         descripcion = request.POST.get('descripcion', '')
 
         Proyecto.objects.create(
+            usuario=usuario,
             nombre=nombre,
             fecha_final=fecha_final,
             numero_integrantes=integrantes,
@@ -17,7 +24,9 @@ def gestionar_proyectos(request):
         )
         return redirect('gestionar_proyectos')
 
-    proyectos = Proyecto.objects.all().order_by('-creado_en')
+    # Mostrar solo los proyectos del usuario autenticado
+    proyectos = Proyecto.objects.filter(usuario=usuario).order_by('-creado_en')
+    
     return render(request, 'proyectos/gestionar.html', {'proyectos': proyectos})
 
 

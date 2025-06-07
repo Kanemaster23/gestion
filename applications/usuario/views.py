@@ -5,7 +5,7 @@ from django.conf import settings
 
 from django.shortcuts import render, redirect
 from .forms import UsuarioRegistroForm
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 from applications.usuario.models import Usuario
 
 def registro_usuario(request):
@@ -13,10 +13,10 @@ def registro_usuario(request):
         form = UsuarioRegistroForm(request.POST)
         if form.is_valid():
             usuario = form.save(commit=False)
-            # Guardar la contraseña como texto plano (NO recomendado en producción)
-            usuario.contraseña = form.cleaned_data['contraseña']
+            from django.contrib.auth.hashers import make_password
+            usuario.contraseña = make_password(form.cleaned_data['contraseña'])
             usuario.save()
-            return redirect('registro_exitoso')  
+            return redirect('registro_exitoso')
     else:
         form = UsuarioRegistroForm()
 
@@ -30,8 +30,9 @@ def login_usuario(request):
         
         try:
             usuario = Usuario.objects.get(nombre_usuario=nombre_usuario)
-            if usuario.contraseña == contraseña:
+            if check_password(contraseña, usuario.contraseña):  # ✅ Comparación segura
                 request.session['usuario_id'] = usuario.id
+                request.session['nombre_usuario'] = usuario.nombre_usuario
                 return redirect('verificacion_2fa')
             else:
                 error = "Contraseña incorrecta"
@@ -79,3 +80,6 @@ def verificar_codigo_2fa(request):
         else:
             return render(request, 'usuario/2fa.html', {'error': 'Código incorrecto.'})
         
+def logout_usuario(request):
+    request.session.flush()
+    return redirect('inicio')
