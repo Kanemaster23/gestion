@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sobre Nosotros</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url("{% static 'imagenes/about.jpeg' %}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      padding-top: 100px;
+    }
+
+    .profile-container {
+      text-align: center;
+    }
+
+    .profile-img {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .description h5,
+    .description p {
+      color: white !important;
+    }
+
+    .card-background {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    h1 {
+      color: white !important;
+      font-weight: bold;
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  {% include 'includes/navbar.html' %}
+
+  <div class="overlay d-flex justify-content-center align-items-center">
+    <div class="container text-center">
+      <h1>Sobre Nosotros</h1>
+      <div class="row justify-content-center">
+
+        <!-- Primer perfil -->
+        <div class="col-md-5 card-background m-3 profile-container">
+          <img src="{% static 'imagenes/mia.jpeg' %}" alt="Mia" class="profile-img">
+          <div class="description mt-3">
+            <h5>Project Owner</h5>
+            <p>Frontend and Backend Developer of the project</p>
+          </div>
+        </div>
+
+        <!-- Segundo perfil -->
+        <div class="col-md-5 card-background m-3 profile-container">
+          <img src="{% static 'imagenes/parra.jpeg' %}" alt="Parra" class="profile-img">
+          <div class="description mt-3">
+            <h5>Database Developer</h5>
+            <p>Minor Maintenance and Others</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

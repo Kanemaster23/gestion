@@ -68,3 +68,6 @@ def gestionar_proyectos(request):
 
 def inicio(request):
     return render(request, 'proyectos/inicio.html')
+
+def sobre_nosotros(request):
+    return render(request, 'proyectos/sobre_nosotros.html')

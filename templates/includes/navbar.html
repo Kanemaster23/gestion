@@ -1,25 +1,38 @@
+{% load static %}
+<!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<nav class="navbar navbar-expand-lg navbar-dark shadow-sm" style="background-color: #000;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="{% url 'inicio' %}">PROJECTS JJ</a>
 
     <!-- Botón hamburguesa para móviles -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido"
+      aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarContenido">
+      <!-- Siempre muestra los links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Sobre Nosotros</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre Nosotros</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'gestionar_proyectos' %}">Proyectos</a></li>
       </ul>
 
-      <div class="d-flex">
-        {% if request.session.usuario_id %}
-          <span class="navbar-text me-3 text-white">👤 {{ request.session.nombre_usuario }}</span>
+      <div class="d-flex align-items-center">
+        {% if request.path == '/usuario/registro/' %}
+          <!-- Solo botón de login en página de registro -->
+          <a href="{% url 'login_usuario' %}" class="btn btn-warning ms-auto">Iniciar Sesión</a>
+
+        {% elif request.path == '/usuario/login/' %}
+          <!-- Solo botón de registro en página de login -->
+          <a href="{% url 'registro' %}" class="btn btn-warning ms-auto">Registrarse</a>
+
+        {% elif request.session.usuario_id %}
+          <span class="navbar-text text-white me-3">👤 {{ request.session.nombre_usuario }}</span>
           <a href="{% url 'logout_usuario' %}" class="btn btn-outline-light btn-sm">Cerrar Sesión</a>
+
         {% else %}
           <a href="{% url 'login_usuario' %}" class="btn btn-warning me-2">Iniciar Sesión</a>
           <a href="{% url 'registro' %}" class="btn btn-warning">Registrarse</a>
@@ -29,4 +42,5 @@
   </div>
 </nav>
 
+<!-- Bootstrap Bundle JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
