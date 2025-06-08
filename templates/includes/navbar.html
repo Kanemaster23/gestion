@@ -19,7 +19,7 @@
       </ul>
 
       <div class="d-flex align-items-center">
-        {% if request.path == '/usuario/registro/' or request.path == '/usuario/registro_exitoso/' %}
+        {% if request.path == '/usuario/registro/' or request.path == '/usuario/registro/exitoso/' %}
           <a href="{% url 'login_usuario' %}" class="btn btn-warning ms-auto">Iniciar Sesión</a>
 
         {% elif request.path == '/usuario/login/' %}
