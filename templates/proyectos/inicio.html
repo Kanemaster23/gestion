@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap JS para dropdown -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
         }
 
         .hero {
@@ -48,11 +47,39 @@
         .btn-warning:hover {
             background-color: #e6b834;
         }
+
+        .bloques {
+            padding: 60px 15px;
+            background-color: #f9f9f9;
+        }
+
+        .bloque {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .bloque:hover {
+            transform: translateY(-5px);
+        }
+
+        .bloque img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .bloque-title {
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Barra de navegación reutilizable -->
+    <!-- Navbar -->
     {% include 'includes/navbar.html' %}
 
     <!-- Sección principal -->
@@ -61,6 +88,42 @@
             <h6 class="text-uppercase">RESULTADOS QUE MERECES</h6>
             <h1 class="display-5 fw-bold">Tenemos la mejor organización para tus proyectos</h1>
             <a href="{% url 'registro' %}" class="btn btn-warning mt-3 px-4 py-2">Empezar ahora</a>
+        </div>
+    </section>
+
+    <!-- Bloques de categorías -->
+    <section class="bloques">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Desarrollo -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="bloque bg-white">
+                        <img src="{% static 'imagenes/desarrollo.jpeg' %}" alt="Desarrollo de software">
+                        <div class="bloque-title text-center">Desarrollo de software</div>
+                    </div>
+                </div>
+                <!-- Marketing -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="bloque bg-white">
+                        <img src="{% static 'imagenes/marketing.jpeg' %}" alt="Marketing">
+                        <div class="bloque-title text-center">Marketing</div>
+                    </div>
+                </div>
+                <!-- Diseño -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="bloque bg-white">
+                        <img src="{% static 'imagenes/diseño.webp' %}" alt="Diseño">
+                        <div class="bloque-title text-center">Diseño</div>
+                    </div>
+                </div>
+                <!-- Operaciones -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="bloque bg-white">
+                        <img src="{% static 'imagenes/operaciones.jpeg' %}" alt="Operaciones">
+                        <div class="bloque-title text-center">Operaciones</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
