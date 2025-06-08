@@ -14,12 +14,14 @@
         body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            background: url("{% static 'imagenes/inicio.webp' %}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
         }
 
         .hero {
-            background: url("{% static 'imagenes/inicio.webp' %}") no-repeat center center/cover;
             height: 100vh;
-            color: white;
             text-align: center;
             position: relative;
             display: flex;
@@ -50,14 +52,17 @@
 
         .bloques {
             padding: 60px 15px;
-            background-color: #f9f9f9;
+            z-index: 2;
+            position: relative;
         }
 
         .bloque {
             border-radius: 16px;
             overflow: hidden;
+            background: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            color: #000;
         }
 
         .bloque:hover {
@@ -74,12 +79,12 @@
             padding: 20px;
             font-size: 1.3rem;
             font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     {% include 'includes/navbar.html' %}
 
     <!-- Sección principal -->
@@ -97,30 +102,30 @@
             <div class="row g-4">
                 <!-- Desarrollo -->
                 <div class="col-12 col-md-6 col-lg-3">
-                    <div class="bloque bg-white">
-                        <img src="{% static 'imagenes/desarrollo.jpeg' %}" alt="Desarrollo de software">
-                        <div class="bloque-title text-center">Desarrollo de software</div>
+                    <div class="bloque">
+                        <img src="{% static 'imagenes/desarrollo.jpg' %}" alt="Desarrollo de software">
+                        <div class="bloque-title">Desarrollo de software</div>
                     </div>
                 </div>
                 <!-- Marketing -->
                 <div class="col-12 col-md-6 col-lg-3">
-                    <div class="bloque bg-white">
-                        <img src="{% static 'imagenes/marketing.jpeg' %}" alt="Marketing">
-                        <div class="bloque-title text-center">Marketing</div>
+                    <div class="bloque">
+                        <img src="{% static 'imagenes/marketing.jpg' %}" alt="Marketing">
+                        <div class="bloque-title">Marketing</div>
                     </div>
                 </div>
                 <!-- Diseño -->
                 <div class="col-12 col-md-6 col-lg-3">
-                    <div class="bloque bg-white">
+                    <div class="bloque">
                         <img src="{% static 'imagenes/diseño.webp' %}" alt="Diseño">
-                        <div class="bloque-title text-center">Diseño</div>
+                        <div class="bloque-title">Diseño</div>
                     </div>
                 </div>
                 <!-- Operaciones -->
                 <div class="col-12 col-md-6 col-lg-3">
-                    <div class="bloque bg-white">
-                        <img src="{% static 'imagenes/operaciones.jpeg' %}" alt="Operaciones">
-                        <div class="bloque-title text-center">Operaciones</div>
+                    <div class="bloque">
+                        <img src="{% static 'imagenes/operaciones.jpg' %}" alt="Operaciones">
+                        <div class="bloque-title">Operaciones</div>
                     </div>
                 </div>
             </div>
