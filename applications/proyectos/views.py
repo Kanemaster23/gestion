@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from applications.proyectos.models import Proyecto, Tarea
 from applications.usuario.models import Usuario
+from django.contrib import messages
 
 def gestionar_proyectos(request):
     if 'usuario_id' not in request.session:
@@ -71,3 +72,7 @@ def inicio(request):
 
 def sobre_nosotros(request):
     return render(request, 'proyectos/sobre_nosotros.html')
+
+def redireccionar_404(request, exception):
+    messages.warning(request, "Página no encontrada. Has sido redirigido al inicio.")
+    return redirect('inicio')

@@ -23,3 +23,7 @@ urlpatterns = [
     path('usuario/', include('applications.usuario.urls')),
     path('proyectos/', include('applications.proyectos.urls')),
 ]
+
+from django.conf.urls import handler404
+
+handler404 = 'applications.proyectos.views.redireccionar_404'
